@@ -6,6 +6,8 @@ import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard"
 import Nav from "./pages/Nav"
 import NotFound from "./pages/NotFound"
+import { About } from './pages/About'
+import { ComingSoon } from './pages/ComingSoon'
 
 function App() {
  
@@ -16,7 +18,10 @@ function App() {
  <Routes>
   <Route path="/" element={ <Home/>} />
   <Route path="/dashboard" element={ <Dashboard/>} />
+  <Route path="/about" element={< About />} />
+  <Route path="/soon" element={ <ComingSoon /> } />
   <Route path="*" element={<NotFound />} />
+
  </Routes>
  </>
   )
