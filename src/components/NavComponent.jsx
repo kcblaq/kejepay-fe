@@ -5,6 +5,8 @@ import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
 import logo from "../components/Assets/logo.svg"
 import { AiOutlineMenu } from "react-icons/ai"
+import Login from "./Login"
+import Register from "./Register"
 
 
 const Tabs = [
@@ -20,6 +22,16 @@ function NavComponent() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
+
+
+  const handleOpenLogin = () => setOpenLogin(true);
+  const handleCloseLogin = () => setOpenLogin(false);
+
+  const handleOpenRegister = () => setOpenRegister(true);
+  const handleCloseRegister = () => setOpenRegister(false );
+
 
   const theme = useTheme()
 
@@ -47,14 +59,13 @@ function NavComponent() {
     p: 4,
   };
 
-
-
   let nonActive = {
     textDecoration: 'none',
     color: 'black',
     fontFamily: 'sans-serif',
   }
-
+  const sec = import.meta.env.VITE_SECRET
+// console.log(sec)
   return (
     <>
       <div className={styles.main} >
@@ -85,13 +96,48 @@ function NavComponent() {
 
 
         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, gap: { sm: 2, md: 2, lg: 4 } }} >
-          <Button variant='outlined' className={styles.btn} sx={{ borderRadius: '50px' }} >
-            Login
+          <Button variant='outlined' className={styles.btn} sx={{ borderRadius: '50px' }} onClick={handleOpenLogin} >
+            Login 
           </Button>
 
-          <Button variant='contained' className={styles.btn} sx={{ borderRadius: '50px' }}>
+          {/* Login modal starts here ... */}
+          <Modal
+            open={openLogin}
+            onClose={handleCloseLogin}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Login Modal Here...
+              </Typography>
+            <Login />
+            </Box>
+          </Modal>
+
+
+          <Button variant='contained'
+            className={styles.btn}
+            sx={{ borderRadius: '50px' }}
+            onClick={handleOpenRegister}
+          >
             Register
           </Button>
+          <Modal
+            open={openRegister}
+            onClose={handleCloseRegister}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Register here ...
+              </Typography>
+              <Register />
+
+            </Box>
+          </Modal>
+
         </Box>
 
         <Box sx={{ display: { md: 'none' } }} >
